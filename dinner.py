@@ -1,4 +1,5 @@
-import tkinter
+﻿import tkinter
+import os
 
 class Dinner:
     def __init__(self, master):
@@ -104,7 +105,7 @@ class Dinner:
         buildFram.columnconfigure(2, weight = 2)
         buildFram.rowconfigure(0, weight = 1)
 
-        self.lable = tkinter.Label(buildFram, text = "如有宝贵建议请联系：huan.liu@united-imaging.com",
+        self.lable = tkinter.Label(buildFram, text = "如有建议请联系：huan.liu@united-imaging.com",
                                    bg = 'darkcyan', fg = 'white', font = ('楷体', 16))
         self.lable.grid(row = 0, column = 0, sticky = 'nsew')
 
@@ -115,7 +116,24 @@ class Dinner:
         self.lableNull.grid(row = 0, column = 2, sticky = 'nesw')
 
     def OnPositiveCommandRaised__(self):
-        print(self.timeDic["MON"].get())
+        self.timeString = self.GetTimeString()
+        self.creatTaskString = 'SCHTASKS /Create /SC WEEKLY /D ' + self.timeString + ' /ST 11:00 /TN dinner /TR d:\dinner' + '\\' + 'run.bat'
+        self.file = open('D:\Dinner\creatDinnerTask.bat', 'w')
+        self.file.truncate()
+        self.file.write('SCHTASKS /Delete /TN dinner /F' + '\n')
+        self.file.write(self.creatTaskString)
+        self.file.close()
+        #运行.bat程序
+        os.system('D:\Dinner\creatDinnerTask.bat')
+
+    def GetTimeString(self):
+        timeString = ''
+        for key in self.timeDic.keys():
+            if self.timeDic[key].get() == 1:
+                timeString += key
+                timeString += " "
+        return  '\"'+ timeString + '\"'
+
 
 
 if __name__ == '__main__':
