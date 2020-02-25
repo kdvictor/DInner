@@ -1,2 +1,2 @@
 SCHTASKS /Delete /TN dinner /F
-SCHTASKS /Create /SC WEEKLY /D "SAT MON THU WED TUE FRI " /ST 11:00 /TN dinner /TR d:\dinner\run.bat
+SCHTASKS /Create /SC WEEKLY /D "WED THU SAT MON FRI TUE " /ST 11:00 /TN dinner /TR ./runDinner.exe

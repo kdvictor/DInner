@@ -1,1 +1,0 @@
-start D:/dinner/depends/clickinternetpage/pythonw.exe D:/dinner/runDinner.py
