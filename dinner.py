@@ -117,7 +117,8 @@ class Dinner:
 
     def OnPositiveCommandRaised__(self):
         self.timeString = self.GetTimeString()
-        self.creatTaskString = 'SCHTASKS /Create /SC WEEKLY /D ' + self.timeString + ' /ST 11:00 /TN dinner /TR runDinner.exe'
+        self.currentFolder = os.path.dirname(os.path.abspath(__file__))
+        self.creatTaskString = 'SCHTASKS /Create /SC WEEKLY /D ' + self.timeString + ' /ST 11:00 /TN dinner /TR ' + self.currentFolder + '\\runDinner.exe'
         self.file = open('./creatDinnerTask.bat', 'w')
         self.file.truncate()
         self.file.write('SCHTASKS /Delete /TN dinner /F' + '\n')
