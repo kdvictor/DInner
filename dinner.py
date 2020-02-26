@@ -105,7 +105,7 @@ class Dinner:
         buildFram.columnconfigure(2, weight = 2)
         buildFram.rowconfigure(0, weight = 1)
 
-        self.lable = tkinter.Label(buildFram, text = "如有建议请联系：huan.liu@united-imaging.com",
+        self.lable = tkinter.Label(buildFram, text = "如有建议请联系：huanliu_uestc@163.com",
                                    bg = 'darkcyan', fg = 'white', font = ('楷体', 16))
         self.lable.grid(row = 0, column = 0, sticky = 'nsew')
 
@@ -117,14 +117,14 @@ class Dinner:
 
     def OnPositiveCommandRaised__(self):
         self.timeString = self.GetTimeString()
-        self.creatTaskString = 'SCHTASKS /Create /SC WEEKLY /D ' + self.timeString + ' /ST 11:00 /TN dinner /TR ./runDinner.exe'
+        self.creatTaskString = 'SCHTASKS /Create /SC WEEKLY /D ' + self.timeString + ' /ST 11:00 /TN dinner /TR runDinner.exe'
         self.file = open('./creatDinnerTask.bat', 'w')
         self.file.truncate()
         self.file.write('SCHTASKS /Delete /TN dinner /F' + '\n')
         self.file.write(self.creatTaskString)
         self.file.close()
         #运行.bat程序
-        os.system('D:\Dinner\creatDinnerTask.bat')
+        os.system('creatDinnerTask.bat')
 
     def GetTimeString(self):
         timeString = ''
